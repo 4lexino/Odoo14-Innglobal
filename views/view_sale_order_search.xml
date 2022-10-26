@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_sale_order_search_innglobal" model="ir.ui.view">
+            <field name="name">sale.order.search.inherit.innglobal</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="agencia" />
+                    <field name="talento" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

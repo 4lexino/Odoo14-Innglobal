@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <!--    WIZARD: Vista de combinar líneas de factura    -->
+        <record id="view_combinar_lineas_factura" model="ir.ui.view">
+            <field name="name">Combinar líneas de factura</field>
+            <field name="model">invoice.advance.combinar.lineas.facturas</field>
+            <field name="arch" type="xml">
+                <form string="Combinar líneas de factura">
+                    <p class="oe_grey">
+                        Escoge el producto que tendrá la combinación de las líneas de la factura.
+                    </p>
+                    <group>
+                        <field name="producto_combinado_id" required="1" />
+                    </group>
+                    <footer>
+                        <button name="combinar_lineas_factura" type="object" string="Combinar líneas" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--    Creamos la acción para combinar líneas de facturas    -->
+        <record model="ir.actions.act_window" id="invoice_lines_invoice_merge_action">
+            <field name="name">Combinar líneas de factura</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="target">new</field>
+            <field name="res_model">invoice.advance.combinar.lineas.facturas</field>
+            <field name="view_mode">form</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_sale_order_form" model="ir.ui.view">
+            <field name="name">sale.order.form.fechalf</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <field name="payment_term_id" position="after">
+                    <!-- Insertamos campo de fecha límite de facturación -->
+                    <field name="fecha_lim_facturacion" />
+                    <!-- Insertamos campo de tipo de comprobante -->
+                    <field name="tipo_comprobante" />
+                </field>
+
+                <!-- Reemplazamos botón de enviar cotización -->
+                <button name="action_quotation_send" position="replace">
+                    <button name="action_quotation_send" string="Send by Email" type="object" states="draft" class="btn-primary" invisible="1" />
+                    <button type="object" name="action_enviar_cotizacion" string="Enviar cotización" class="oe_highlight"/>
+                    <button type="object" name="action_enviar_confirmacion_contado" string="Enviar confirmación contado" class="btn-primary"/>
+                    <button type="object" name="action_enviar_confirmacion_grande" string="Enviar confirmación grande" class="btn-primary"/>
+                </button>
+
+                <!-- Hacemos visible el campo de oportunidad -->
+                <field name="user_id" position="before">
+                    <field name="opportunity_id" />
+                </field>
+
+                <xpath expr="//page[@name='other_information']//group[@name='sales_person']//field[@name='tag_ids']" position="replace">
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" readonly="1"/>
+                </xpath>
+
+                <!-- Hacemos visible el campo de fecha de la órden -->
+<!--                <field name="date_order" position="replace">-->
+<!--                    <field name="date_order" />-->
+<!--                </field>-->
+<!--                <xpath expr="//group[@name='order_details']" position="inside">-->
+<!--                    <field name="validity_date" attrs="{'invisible': [('state', 'in', ['sale', 'done'])]}"/>-->
+<!--                    <div class="o_td_label" groups="base.group_no_one" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])]}">-->
+<!--                        <label for="date_order" string="Quotation Date"/>-->
+<!--                    </div>-->
+<!--                    <field name="date_order" nolabel="1" groups="base.group_no_one" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])]}"/>-->
+<!--                    <div class="o_td_label" attrs="{'invisible': [('state', 'in', ['draft', 'sent'])]}">-->
+<!--                        <label for="date_order" string="Order Date"/>-->
+<!--                    </div>-->
+<!--                    <field name="date_order" attrs="{'required': [('state', 'in', ['sale', 'done'])], 'invisible': [('state', 'in', ['draft', 'sent'])]}" nolabel="1"/>-->
+<!--                    <field name="show_update_pricelist" invisible="1"/>-->
+<!--                    <label for="pricelist_id" groups="product.group_product_pricelist"/>-->
+<!--                    <div groups="product.group_product_pricelist" class="o_row">-->
+<!--                        <field name="pricelist_id" options="{'no_open':True,'no_create': True}"/>-->
+<!--                        <button name="update_prices" type="object" string=" Update Prices" help="Recompute all prices based on this pricelist" class="btn-link mb-1 px-0" icon="fa-refresh" confirm="This will update all unit prices based on the currently set pricelist." attrs="{'invisible': ['|', ('show_update_pricelist', '=', False), ('state', 'in', ['sale', 'done','cancel'])]}"/>-->
+<!--                    </div>-->
+<!--                    <field name="currency_id" invisible="1"/>-->
+<!--                    <field name="payment_term_id" options="{'no_open':True,'no_create': True}"/>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>

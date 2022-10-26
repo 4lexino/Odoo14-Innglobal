@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <template id="report_cotizacion_multiple">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <style>
+                            .marca_agua{
+                                -ms-transform: rotate(-45deg); /* IE 9 */
+                                -webkit-transform: rotate(-45deg); /* Chrome, Safari, Opera */
+                                transform: rotate(-45deg);
+                            }
+                        </style>
+
+                        <div class="marca_agua" style="position:absolute;opacity:0.25;z-index:-1;width:100%;margin-top:350px;">
+                            <center><span style="font-size:164px;color:#EEEEEE;">
+                                <t t-if="doc.partner_id.parent_id">
+                                    <t t-esc="doc.partner_id.parent_id.name" />
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="doc.partner_id.name" />
+                                </t>
+                            </span></center>
+                        </div>
+
+                      <div class="row" style="display:grid;grid-template-columns:50% 50%;">
+                        <div class="col-6">
+                            <div>
+                              <img style="max-width: 200px;" t-att-src="image_data_uri(res_company.logo)"/>
+                            </div>
+                        </div>
+                        <div class="col-6 text-right" style="font-size:22px;">
+                          Monterrey N.L. <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %b %Y')"/>
+                        </div>
+                      </div>
+                        <t t-if="doc.partner_id.parent_id">
+                            <h4 t-esc="doc.partner_id.name" class="font-weight-bold" />
+                            <h4 t-esc="doc.partner_id.parent_id.name" class="font-weight-bold" />
+                        </t>
+                        <t t-else="">
+                            <h4 t-esc="doc.opportunity_id.contact_name" class="font-weight-bold" />
+                            <h4 t-esc="doc.partner_id.name" class="font-weight-bold" />
+                        </t>
+                        <p style="font-size: 20px;font-weight:thin; margin-top:24px;margin-bottom:24px;">
+                          Hola, te compartimos la cotización solicitada para los servicios de promoción y publicidad con nuestros talentos.
+                        </p>
+
+                        <t t-set="newlines" t-value="doc._groupByAccion(doc.order_line)" />
+
+                        <!-- Recorremos las lineas de la cot. -->
+                        <t t-foreach="newlines" t-as="accion">
+                              <!-- Cuando es un producto normal -->
+                            <h4 class="font-weight-bold">
+                                Acciones de
+                                <t t-foreach="newlines[accion]" t-as="influencer">
+                                    <t t-if="newlines[accion][-1] == influencer">
+                                        <t t-esc="influencer"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-esc="influencer"/>,
+                                    </t>
+                                </t>
+                                <br/>
+                                <p><t t-esc="accion"/></p>
+                            </h4>
+                        </t>
+
+                        <br/>
+                        <h4 class="font-weight-bold">Costo: </h4>
+                        <p style="font-size: 20px;font-weight:thin; margin-top:24px;margin-bottom:24px;">
+                            <t t-esc="doc._formatLang(doc.amount_untaxed)" t-field-options='{"widget": "monetary", "display_currency": "doc.currency_id"}' /> + IVA
+                        </p>
+                        <p style="font-size: 20px;font-weight:thin; margin-top:24px;margin-bottom:24px;">
+                          Cualquier duda, estamos a sus órdenes,<br/>
+                          Inn Global Team
+                        </p>
+                      <p style="font-weight: bold;font-size: 16px;line-height:1.1;">
+                          * En caso de requerir código de descuento o swipe up se cotiza adicional<br/>
+                          * Todo está sujeto a disponibilidad del Talento<br/>
+                          * Para agendar las acciones el pago debe estar 100% liquidado<br/>
+                          * Cotización válida por 10 días<br/>
+                          * Una vez acordada la fecha no hay cambios sobre la fecha estipulada<br/>
+                          * Dinámica de los unboxings ya está establecida y no se cambia para ninguna marca
+                          * Todos los productos a mencionar son seleccionados previamente por nuestro talento<br/>
+                          * Una vez liquidado no existen devoluciones por cancelación del cliente<br/>
+                      </p>
+                      <p style="font-weight:bold;font-size: 14px;line-height:1.1;">
+                        AVISO LEGAL Y DE CONFIDENCIALIDAD IMPORTANTE:<br/>
+                        Este documento es de propiedad intelectual de Inn Global Talent SA de CV.<br/>
+                        Toda la información que contiene este documento es CONFIDENCIAL y para uso exclusivo del destinatario arriba indicado.<br/>
+                        Queda prohibido por ley toda difusión, divulgación, distribución o mal uso de la información.
+                      </p>
+                    </div>
+                </t>
+            </t>
+       </template>
+    </data>
+</odoo>

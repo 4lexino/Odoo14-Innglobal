@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_sale_order_tree_facturar" model="ir.ui.view">
+            <field name="name">sale.order.tree.facturar</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree" />
+            <field name="arch" type="xml">
+                <field name="date_order" position="before">
+                    <field string="Fecha lim. factura" name="fecha_lim_facturacion" optional="show" />
+                    <field string="Comprobante" name="tipo_comprobante" optional="show" />
+                </field>
+            </field>
+        </record>
+    </data>
+    <data noupdate="0">
+        <record id="view_sale_order_tree_cotizacion" model="ir.ui.view">
+            <field name="name">sale.order.tree.cotizacion</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree" />
+            <field name="arch" type="xml">
+                <field name="create_date" position="before">
+                    <field string="Fecha lim. factura" name="fecha_lim_facturacion" />
+                </field>
+
+                <field name="fecha_lim_facturacion" position="before">
+                    <field string="Términos de pago" optional="show" name="payment_term_id" />
+                </field>
+
+                <field name="name" position="after">
+                    <field string="Campaña" name="origin" optional="show" />
+                </field>
+
+                <field name="origin" position="after">
+                    <field string="Talento" name="talento" optional="show" />
+                </field>
+
+                <field name="partner_id" position="before">
+                    <field string="Agencia" name="agencia" optional="show" />
+                </field>
+
+                <field name="state" position="before">
+                    <field string="Etapa CRM" name="etapa_lead" optional="show" decoration-success="etapa_lead == 'Ganado'" widget="badge" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_invoice_advance_combinar_lineas_facturas,access.invoice.advance.combinar.lineas.facturas,model_invoice_advance_combinar_lineas_facturas,account.group_account_invoice,1,1,1,0

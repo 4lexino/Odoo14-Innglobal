@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_account_move_tree_innglobal" model="ir.ui.view">
+            <field name="name">account.move.tree.innglobal</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="tipo_comprobante_from_venta" string="Tipo Comprobante" optional="show" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

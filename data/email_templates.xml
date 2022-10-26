@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <template id="mail_notification_innglobal" name="Innglobal: Plantilla de correo">
+<!--            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">-->
+<!--                <tr>-->
+<!--                    <td valign="middle" align="center">-->
+<!--                        <img t-att-src="'/logo.png?company=%s' % (company.id or 0)" style="padding: 0px; margin: 0px; height: 64px;margin-bottom:10px;" t-att-alt="'%s' % company.name"/>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td align="center">-->
+<!--                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 24px; background-color: white; color: #454748; border-collapse:separate;">-->
+<!--                        <tbody>-->
+<!--                            <tr>-->
+<!--                                <td style="padding: 0">-->
+<!--                                    <t t-raw="message.body"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--                        </table>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--            </table>-->
+            <t t-raw="message.body"/>
+        </template>
+
+        <record id="email_template_envio_cotizacion" model="mail.template">
+            <field name="name">Cotización: Enviar por correo</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="email_from">${(user.email_formatted or '')|safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="subject">${object.opportunity_id.name}</field>
+            <field name="reply_to">${(user.email_formatted or '')|safe}</field>
+            <field name="report_name">${object.name}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="xml">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        % if object.partner_id.parent_id :
+                            Hola ${object.partner_id.name}<br/>
+                        % else :
+                            Hola ${object.opportunity_id.contact_name}<br/>
+                        % endif
+                        Buen día.<br/><br/>
+                        Gracias por contactarnos y por su interés en nuestro talento.<br/><br/>
+                        Mi nombre es ${user.name} y formo parte del área comercial de Inn Global Agency.<br/>
+                        Te comparto la cotización para realizar las acciones deseadas.<br/><br/>
+                        Quedo al pendiente de tu confirmación de recibido y comentarios.<br/><br/>
+                        Muchas gracias.<br/>
+                        Saludos,<br/>
+
+                        % if user.signature :
+                            <br/>
+                            ${user.signature | safe}
+                        % endif
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <record id="email_template_confirmacion_cotizacion_contado" model="mail.template">
+            <field name="name">Cotización: Confirmación contado</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="email_from">${(user.email_formatted or '')|safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="email_to">administracion@innglobalagency.com</field>
+            <field name="reply_to">${(user.email_formatted or '')|safe}</field>
+            <field name="subject">${object.opportunity_id.name}</field>
+            <field name="report_name">${object.name}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="xml">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Hola,<br/>
+                        En este correo copio a mi compañera Mayra Ovalle de administración para que por favor le puedan ir enviando los datos fiscales para emitir la factura y dar seguimiento al pago de la siguiente campaña:<br/>
+                        <br/>
+                    </p>
+                    <table class="table table-bordered table-striped-columns" style="width:80%;">
+                        <tbody>
+                            <tr>
+                                <td style="background:#E6B74C;">Marca</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Talento</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Acciones</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Fecha tentativa</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;"><b>Contraprestación</b></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Forma de pago</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Condiciones de pago</td>
+                                <td>Contado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        <br/>
+                        <b>
+                            * Una vez copiado con administración se confirma la campaña aprobada por ambas partes.<br/>
+                            * La marca tiene la obligación de liquidar el pago. En caso de cancelar la marca debe notificar sobre este mismo correo.<br/>
+                        </b>
+                        <br/>
+                        Cualquier duda quedo al pendiente<br/>
+                        Muchas Gracias<br/>
+                        Saludos<br/>
+
+                        % if user.signature:
+                            <br/>
+                            ${user.signature | safe}
+                        % endif
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <record id="email_template_confirmacion_cotizacion_grande" model="mail.template">
+            <field name="name">Cotización: Confirmación grande</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="email_from">${(user.email_formatted or '')|safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="email_to">administracion@innglobalagency.com</field>
+            <field name="reply_to">${(user.email_formatted or '')|safe}</field>
+            <field name="subject">${object.opportunity_id.name}</field>
+            <field name="report_name">${object.name}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="xml">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Hola,<br/>
+                        En este correo copio a mi compañera Mayra Ovalle de administración para que por favor le puedan ir enviando los datos fiscales para emitir la factura y dar seguimiento al pago de la siguiente campaña:<br/>
+                        <br/>
+                    </p>
+                    <table class="table table-bordered table-striped-columns" style="width:80%;">
+                        <tbody>
+                            <tr>
+                                <td style="background:#E6B74C;">Marca</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Talento</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Acciones</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Fecha tentativa</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;"><b>Contraprestación</b></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Forma de pago</td>
+                                <td>Factura</td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Condiciones de pago</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Fecha de facturación</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#E6B74C;">Contrato</td>
+                                <td>Sí</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        <br/>
+                        <b>
+                            * Una vez copiado con administración se confirma la campaña aprobada por ambas partes.<br/>
+                            * La marca tiene la obligación de liquidar el pago. En caso de cancelar la marca debe notificar sobre este mismo correo.<br/>
+                        </b>
+                        <br/>
+                        Cualquier duda quedo al pendiente<br/>
+                        Muchas Gracias<br/>
+                        Saludos<br/>
+
+                        % if user.signature:
+                            <br/>
+                            ${user.signature | safe}
+                        % endif
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <record id="email_template_envio_encuesta_satisfaccion" model="mail.template">
+            <field name="name">Encuesta: Enviar por correo</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="email_from">${user.email_formatted}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="subject">${object.company_id.name}</field>
+            <field name="report_name">${(object.name or '').replace('/','-')}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="xml">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Hola ${object.contact_name},<br/>
+                        Ayudanos a mejorar nuestros servicios contestando la siguiente encuesta. <br/><br/>
+                        <a href="http://18.208.210.27:8069/survey/start/524b329e-1078-4dfa-8b73-19bd8793217e" style="background-color:#875A7B;padding:8px 16px 8px 16px; color:#fff; border-radius:5px; font-size:13px" target="_blank">Empezar encuesta</a>
+                        <br/><br/>
+                        Gracias por su participación.
+                        <br/><br/>
+                    </p>
+                </div>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

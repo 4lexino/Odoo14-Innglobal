@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_crm_tree_innglobal" model="ir.ui.view">
+            <field name="name">crm.lead.tree.opportunity.innglobal</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor" />
+            <field name="arch" type="xml">
+                <!--       ATRIBUTOS         -->
+
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-danger">active == False</attribute>
+<!--                    <attribute name="decoration-success">active == True and is_stage_won</attribute>-->
+<!--                    <attribute name="default_order">active desc, activity_date_deadline_my</attribute>-->
+                </xpath>
+
+                <!--       CAMPOS         -->
+
+                <field name="create_date" position="after">
+                    <field name="active" string="Perdida" optional="hide" />
+                    <field name="is_stage_won" invisible="1"/>
+                </field>
+
+                <field name="user_id" position="replace">
+
+                </field>
+
+                <field name="name" position="before">
+                    <field name="user_id" widget="many2one_avatar_user" optional="show" domain="[('share', '=', False)]"/>
+                </field>
+
+                <field name="name" position="replace">
+                    <field name="name" optional="show" string="Campaña" readonly="1"/>
+                </field>
+
+                <field name="partner_id" position="replace">
+                    <field name="partner_id" optional="show"/>
+                </field>
+
+                <field name="partner_id" position="after">
+                    <field name="talento_id" optional="show"/>
+                    <field string="Monto total" name="sale_amount_total" optional="show" sum="Monto total" widget="monetary" options="{'currency_field': 'company_currency'}" />
+                </field>
+
+                <field name="contact_name" position="replace">
+                    <field name="contact_name" optional="hide"/>
+                </field>
+
+                <field name="email_from" position="replace">
+                    <field name="email_from" optional="hide"/>
+                </field>
+
+                <field name="phone" position="replace">
+                    <field name="phone" optional="hide"/>
+                </field>
+
+                <field name="team_id" position="replace">
+                    <field name="team_id" optional="hide"/>
+                </field>
+
+                <field name="expected_revenue" position="replace">
+                    <field name="expected_revenue" sum="Expected Revenues" optional="hide" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                </field>
+
+                <field name="stage_id" position="after">
+                    <field name="dias_en_etapa" optional="show"/>
+                </field>
+
+                <field name="activity_ids" position="replace">
+
+                </field>
+                <field name="activity_user_id" position="replace">
+
+                </field>
+                <field name="activity_date_deadline_my" position="replace">
+
+                </field>
+                <field name="dias_en_etapa" position="after">
+                    <field name="activity_ids" widget="list_activity"/>
+                </field>
+                <field name="activity_ids" position="after">
+                    <field name="activity_user_id" optional="hide" string="Activity by" widget="many2one_avatar_user"/>
+                </field>
+                <field name="activity_user_id" position="after">
+                    <field name="activity_date_deadline_my" widget="remaining_days" options="{'allow_order': '1'}"/>
+                </field>
+
+                <field name="recurring_revenue_monthly" position="replace">
+                    <field name="recurring_revenue_monthly" sum="Expected MRR" optional="hide" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                </field>
+
+            </field>
+        </record>
+    </data>
+</odoo>

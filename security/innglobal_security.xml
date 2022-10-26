@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <!-- Wizard access rules -->
+    <record id="invoice_combinar_lineas_factura_rule" model="ir.rule">
+        <field name="name">Invoice Combinar Líneas de Factura Rule</field>
+        <field name="model_id" ref="model_invoice_advance_combinar_lineas_facturas"/>
+    </record>
+</data>
+</odoo>

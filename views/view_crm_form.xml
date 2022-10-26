@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_crm_lead_form_innglobal" model="ir.ui.view">
+            <field name="name">crm.lead.form.opportunity.innglobal</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <h2>
+                        <div class="col">
+                            <label for="talento_id" class="oe_edit_only"/>
+                            <div class="o_row d-flex">
+                                <field name="talento_id" />
+                            </div>
+                        </div>
+                    </h2>
+                </field>
+
+                <!-- Damos color a los botones -->
+                <button name="action_set_won_rainbowman" position="replace">
+                    <button name="action_set_won_rainbowman" string="Marcar como ganado" type="object" class="btn-success" attrs="{'invisible': ['|','|', ('active','=',False), ('probability', '=', 100), ('type', '=', 'lead')]}"/>
+                </button>
+
+                <button name="307" position="replace">
+                    <button name="307" string="Marcar como perdido" type="action" class="btn-warning" context="{'default_lead_id': active_id}" attrs="{'invisible': ['|', ('type', '=', 'lead'),('active', '=', False),('probability', '&lt;', 100)]}"/>
+                </button>
+
+                <!-- Agregamos botón de enviar encuesta -->
+                <button name="action_set_lost" position="after">
+                    <button type="object" name="action_enviar_encuesta" string="Enviar encuesta" class="btn-secondary"  />
+                </button>
+
+            </field>
+        </record>
+    </data>
+</odoo>

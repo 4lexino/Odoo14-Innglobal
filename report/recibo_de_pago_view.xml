@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <template id="report_recibo_de_pago">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="font-size: 14px;">
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="row d-flex">
+                                  <div class="col-4 text-left"><img style="max-width: 120px;" t-att-src="image_data_uri(res_company.logo)"/></div>
+                                  <div class="col-4 align-self-end text-center"><h1 class="font-weight-bold" style="font-size: 28px;">RECIBO DE PAGO</h1></div>
+                                  <div class="col-4 text-right"><h2 class="font-weight-bold" style="font-size: 24px;color:red;"><span t-esc="doc.id - 8"/></h2></div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-2">
+                                    Recibí de
+                                  </div>
+                                  <div class="col-4" style="border-bottom:1px solid #000;">
+                                    <span t-field="doc.contacto_pago" />
+                                  </div>
+                                  <div class="col-1">
+                                    Negocio
+                                  </div>
+                                  <div class="col-5" style="border-bottom:1px solid #000;">
+                                    <span t-field="doc.partner_id.name"/>
+                                  </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                  <div class="col-2">
+                                    La cantidad de
+                                  </div>
+                                  <div class="col-2" style="border-bottom:1px solid #000;">
+                                    <span t-field="doc.amount" />
+                                  </div>
+                                  <div class="col-7 offset-1" style="border-bottom:1px solid #000;">
+                                    (<span t-field="doc.amount_to_text" />)
+                                  </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                  <div class="col-2">
+                                    Por concepto de
+                                  </div>
+                                  <div class="col-10" style="border-bottom:1px solid #000;">
+                                    <span t-field="doc.ref" />
+                                  </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                  <div class="col-2">
+                                    El pago fue hecho en
+                                  </div>
+                                  <div class="col-3" style="border-bottom:1px solid #000;">
+                                    <span t-field="doc.journal_id.name" />
+                                  </div>
+
+                                  <div class="col-3">
+
+                                  </div>
+
+                                  <div class="col-1">
+                                    Fecha:
+                                  </div>
+                                  <div class="col-3" style="border-bottom:1px solid #000;">
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                                  </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 64px;">
+                                  <div class="col-6">
+                                    <p class="font-weight-bold" style="font-size: 12px;">
+                                      <span t-field="doc.company_id.street" /><br/>
+                                      <span t-field="doc.company_id.street2" />, <span t-field="doc.company_id.city" /> C.P. <span t-field="doc.company_id.zip" />
+                                    </p>
+                                  </div>
+                                  <div class="col-3 text-center">
+                                    <div style="border-top:1px solid #000;width: 250px;display:block;margin: 0 auto;"></div>
+                                    <div style="display:block;">Firma de recibido</div>
+                                  </div>
+                                  <div class="col-3 text-center">
+                                    <div style="border-top:1px solid #000;width: 250px;display:block;margin: 0 auto;"></div>
+                                    <div style="display:block;">INNGLOBAL</div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+
+                            <!-- Copia -->
+                            <div class="row" style="margin-top: 80px;">
+                              <div class="col-12">
+                                <div class="row d-flex">
+                                  <div class="col-4 text-left"><img style="max-width: 120px;" t-att-src="image_data_uri(res_company.logo)"/></div>
+                                  <div class="col-4 align-self-end text-center"><h1 class="font-weight-bold" style="font-size: 28px;">RECIBO DE PAGO</h1></div>
+                                  <div class="col-4 text-right"><h2 class="font-weight-bold" style="font-size: 24px;color:red;"><span t-esc="doc.id - 8"/></h2></div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-2">
+                                    Recibí de
+                                  </div>
+                                  <div class="col-4" style="border-bottom:1px solid #000;">
+                                    <span t-field="doc.contacto_pago" />
+                                  </div>
+                                  <div class="col-1">
+                                    Negocio
+                                  </div>
+                                  <div class="col-5" style="border-bottom:1px solid #000;">
+                                    <span t-field="doc.partner_id.name"/>
+                                  </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                  <div class="col-2">
+                                    La cantidad de
+                                  </div>
+                                  <div class="col-2" style="border-bottom:1px solid #000;">
+                                    <span t-field="doc.amount" />
+                                  </div>
+                                  <div class="col-7 offset-1" style="border-bottom:1px solid #000;">
+                                    (<span t-field="doc.amount_to_text" />)
+                                  </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                  <div class="col-2">
+                                    Por concepto de
+                                  </div>
+                                  <div class="col-10" style="border-bottom:1px solid #000;">
+                                    <span t-field="doc.ref" />
+                                  </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                  <div class="col-2">
+                                    El pago fue hecho en
+                                  </div>
+                                  <div class="col-3" style="border-bottom:1px solid #000;">
+                                    <span t-field="doc.journal_id.name" />
+                                  </div>
+
+                                  <div class="col-3">
+
+                                  </div>
+
+                                  <div class="col-1">
+                                    Fecha:
+                                  </div>
+                                  <div class="col-3" style="border-bottom:1px solid #000;">
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                                  </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 64px;">
+                                  <div class="col-6">
+                                    <p class="font-weight-bold" style="font-size: 12px;">
+                                      <span t-field="doc.company_id.street" /><br/>
+                                      <span t-field="doc.company_id.street2" />, <span t-field="doc.company_id.city" /> C.P. <span t-field="doc.company_id.zip" />
+                                    </p>
+                                  </div>
+                                  <div class="col-3 text-center">
+                                    <div style="border-top:1px solid #000;width: 250px;display:block;margin: 0 auto;"></div>
+                                    <div style="display:block;">Firma de recibido</div>
+                                  </div>
+                                  <div class="col-3 text-center">
+                                    <div style="border-top:1px solid #000;width: 250px;display:block;margin: 0 auto;"></div>
+                                    <div style="display:block;">INNGLOBAL</div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                    </div>
+                </t>
+            </t>
+       </template>
+    </data>
+</odoo>

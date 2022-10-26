@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--    Cotización con precios    -->
+        <record id="report_cotizacion_con_precios" model="ir.actions.report">
+           <field name="name">Cotización con precios</field>
+           <field name="model">sale.order</field>
+           <field name="report_type">qweb-pdf</field>
+           <field name="paperformat_id" ref="base.paperformat_euro" />
+           <field name="print_report_name">object.opportunity_id.name</field>
+           <field name="report_name">innglobal.report_cotizacion_con_precios</field>
+           <field name="report_file">innglobal.report_cotizacion_con_precios_view</field>
+           <field name="binding_model_id" ref="sale.model_sale_order" />
+           <field name="binding_type">report</field>
+        </record>
+
+        <!--    Cotización sin precios    -->
+        <record id="report_cotizacion_sin_precios" model="ir.actions.report">
+           <field name="name">Cotización sin precios</field>
+           <field name="model">sale.order</field>
+           <field name="report_type">qweb-pdf</field>
+           <field name="paperformat_id" ref="base.paperformat_euro" />
+           <field name="print_report_name">object.opportunity_id.name</field>
+           <field name="report_name">innglobal.report_cotizacion_sin_precios</field>
+           <field name="report_file">innglobal.report_cotizacion_sin_precios_view</field>
+           <field name="binding_model_id" ref="sale.model_sale_order" />
+           <field name="binding_type">report</field>
+        </record>
+
+        <!--    Cotización tabla    -->
+        <record id="report_cotizacion_tabla" model="ir.actions.report">
+           <field name="name">Cotización Tabla</field>
+           <field name="model">sale.order</field>
+           <field name="report_type">qweb-pdf</field>
+           <field name="paperformat_id" ref="base.paperformat_euro" />
+           <field name="print_report_name">object.opportunity_id.name</field>
+           <field name="report_name">innglobal.report_cotizacion_tabla</field>
+           <field name="report_file">innglobal.report_cotizacion_tabla_view</field>
+           <field name="binding_model_id" ref="sale.model_sale_order" />
+           <field name="binding_type">report</field>
+        </record>
+
+        <!--    Cotización múltiple    -->
+        <record id="report_cotizacion_multiple" model="ir.actions.report">
+           <field name="name">Cotización múltiple</field>
+           <field name="model">sale.order</field>
+           <field name="report_type">qweb-pdf</field>
+           <field name="paperformat_id" ref="base.paperformat_euro" />
+           <field name="print_report_name">object.opportunity_id.name</field>
+           <field name="report_name">innglobal.report_cotizacion_multiple</field>
+           <field name="report_file">innglobal.report_cotizacion_multiple_view</field>
+           <field name="binding_model_id" ref="sale.model_sale_order" />
+           <field name="binding_type">report</field>
+        </record>
+
+        <!--    Ocultamos Acción: Cotización/Orden por defecto    -->
+        <record id="sale.action_report_saleorder" model="ir.actions.report">
+           <field name="binding_model_id" ref="" />
+        </record>
+    </data>
+</odoo>

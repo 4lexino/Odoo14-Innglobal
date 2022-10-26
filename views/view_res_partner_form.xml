@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_res_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form.agencia</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <field name="company_type" position="after">
+                    <group>
+                        <field name="agencia" />
+                    </group>
+                </field>
+
+                <field name="category_id" position="after">
+                        <field name="instagram" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
